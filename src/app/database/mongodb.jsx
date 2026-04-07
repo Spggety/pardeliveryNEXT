@@ -5,19 +5,20 @@ if (!process.env.MONGODB_UR) {
 }
 
 const uri = process.env.MONGODB_UR;
-const options = {};
+const options = {
+  tls: true, // включаем TLS
+  tlsAllowInvalidCertificates: false, // можно временно true, если проблемы с сертификатом
+};
 
-let client;
+const client = new MongoClient(uri, options);;
 let clientPromise;
 
 if (process.env.NODE_ENV === "development") {
   if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
     global._mongoClientPromise = client.connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
 export default clientPromise;
