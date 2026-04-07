@@ -53,7 +53,7 @@ const ProductsTab = (props) => {
         className={style.TabNavigate}
         style={
           active
-            ? { background: "unset", position: "sticky" }
+            ? { background: "unset", position: "sticky", marginRight: '0' }
             : {
                 position: "fixed",
                 background: "white",

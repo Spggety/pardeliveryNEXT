@@ -44,7 +44,7 @@ export const getProducts = async (tab, offset, sort) => {
   const value_old = getValueByKey(categoriesOld, key);
   const limit = "10";
   const order = getValueByKey(orders, sort);
-  const URL_OLD = `https://online.moysklad.ru/api/remap/1.2/entity/assortment/?filter=pathname~${value_old};stockMode=positiveOnly&expand=images&limit=${limit}&offset=${offset}`;
+  const URL_OLD = `https://api.moysklad.ru/api/remap/1.2/entity/assortment/?filter=pathname~${value_old};stockMode=positiveOnly&expand=images&limit=${limit}&offset=${offset}`;
   const URL_NEW = `https://api.moysklad.ru/api/remap/1.2/report/stock/all?filter=productFolder=${value};stockMode=positiveOnly&expand=images&limit=${limit}&offset=${offset}&order=${order}`;
 
   const response = await fetch(URL_OLD, {
@@ -60,7 +60,7 @@ export const getProductsPath = async (path, offset, sort) => {
   
   const order = getValueByKey(orders, sort);
   const URL_NEW = `https://api.moysklad.ru/api/remap/1.2/report/stock/all?filter=productFolder=${path};stockMode=positiveOnly&expand=images&limit=${limit}&offset=${offset}&order=${order}`;
-  const URL_OLD = `https://online.moysklad.ru/api/remap/1.2/entity/assortment?filter=productFolder=${path};stockMode=positiveOnly&expand=images&limit=${limit}&offset=${offset}&order=${order}`
+  const URL_OLD = `https://api.moysklad.ru/api/remap/1.2/entity/assortment?filter=productFolder=${path};stockMode=positiveOnly&expand=images&limit=${limit}&offset=${offset}&order=${order}`
   const response = await fetch(URL_OLD, {
     headers: {
       authorization: "Bearer aec3495c6678b37e84fd1c39b4ade73a82ce221d",

@@ -91,14 +91,14 @@ export const postAddresses = async (data) => {
 
 export const postProducts = async (data) => {
   try {
-    if (!products) await init();
-    const options = { upsert: true };
     const createTime = new Date();
-    const result = await products.insertMany(
+    if (!products) await init();
+      const result = await products.insertMany(
       data.rows.map((el) => ({ _id: el.id, createTime, ...el })),
       {
         ordered: false,
-      }
+      },
+
     );
 
     return { Products: result };
@@ -106,6 +106,8 @@ export const postProducts = async (data) => {
     return { error: error.message };
   }
 };
+
+
 
 //////////////
 /// Orders ///

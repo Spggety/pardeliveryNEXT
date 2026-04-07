@@ -11,7 +11,7 @@ export async function GET(req) {
       let offset = 0;
       const value_old = `Ассортимент по категориям`;
       // Выгрузка JSON с внешнего API с использованием пагинации
-      const URL_NEW = `https://online.moysklad.ru/api/remap/1.2/entity/assortment/?filter=pathname~${value_old};&expand=images&limit=${limit}&offset=${offset}`;
+      const URL_NEW = `https://api.moysklad.ru/api/remap/1.2/entity/assortment/?filter=pathname~${value_old};&expand=images&limit=${limit}&offset=${offset}`;
 
       const response = await fetch(URL_NEW, {
         headers: {
@@ -21,11 +21,11 @@ export async function GET(req) {
 
       const data = await response.json();
       const totalPages = data.meta.size;
-
+      console.log(totalPages)
       for (let i = 1; i * 100 <= totalPages + 100; i++) {
         console.log(i * 100);
         const nextPageResponse = await fetch(
-          `https://online.moysklad.ru/api/remap/1.2/entity/assortment/?filter=pathname~${value_old};&expand=images&limit=${limit}&offset=${
+          `https://api.moysklad.ru/api/remap/1.2/entity/assortment/?filter=pathname~${value_old};&expand=images&limit=${limit}&offset=${
             i * 100
           }`,
           {
